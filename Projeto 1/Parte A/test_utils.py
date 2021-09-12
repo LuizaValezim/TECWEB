@@ -1,8 +1,7 @@
 from unittest.mock import patch, mock_open
 from pathlib import Path
-
-import unittest
 import utils
+import unittest
 import json
 
 REQUEST_TEMPLATE = '''{method} {route} HTTP/1.1
@@ -52,14 +51,6 @@ class ReadFileTestCase(unittest.TestCase):
 
         self.assertEqual(received, read_data)
 
-    def test_read_css_file(self):
-        filename = Path() / 'subdir' / 'textfile.css'
-        self.assert_read(filename, 'p {color: "red"}')
-
-    def test_read_js_file(self):
-        filename = Path() / 'subdir' / 'textfile.js'
-        self.assert_read(filename, 'console.log("OK");')
-
     def test_read_txt_file(self):
         filename = Path() / 'subdir' / 'textfile.txt'
         self.assert_read(filename, 'Some text')
@@ -68,6 +59,14 @@ class ReadFileTestCase(unittest.TestCase):
         filename = Path() / 'subdir' / 'textfile.html'
         self.assert_read(filename, '<html></html>')
 
+    def test_read_css_file(self):
+        filename = Path() / 'subdir' / 'textfile.css'
+        self.assert_read(filename, 'p {color: "red"}')
+
+    def test_read_js_file(self):
+        filename = Path() / 'subdir' / 'textfile.js'
+        self.assert_read(filename, 'console.log("OK");')
+
     def test_read_jpg_file(self):
         filename = Path() / 'subdir' / 'textfile.jpg'
         self.assert_read(filename, bytes([1,3,2,5,234,23,123,23,2,255]))
@@ -75,6 +74,27 @@ class ReadFileTestCase(unittest.TestCase):
     def test_read_png_file(self):
         filename = Path() / 'subdir' / 'textfile.png'
         self.assert_read(filename, bytes([1,3,2,5,234,23,123,23,2,255]))
+
+
+@target_function('load_data')
+class LoadDataTestCase(unittest.TestCase):
+    def test_load_data_from_file(self):
+        expected = [
+            {
+                "titulo": "Receita de miojo",
+                "detalhes": "Bata com um martelo antes de abrir o pacote. Misture o tempero, coloque em uma vasilha e aproveite seu snack :)"
+            },
+            {
+                "titulo": "Pão doce",
+                "detalhes": "Abra o pão e coloque o seu suco em pó favorito."
+            },
+        ]
+        m = mock_open(read_data=json.dumps(expected))
+        with patch('utils.open', m):
+            received = utils.load_data('data.json')
+        self.assertEqual(expected, received)
+        self.assertEqual(Path(m.call_args[0][0]), Path('data/data.json'))
+
 
 @target_function('load_template')
 class LoadTemplateTestCase(unittest.TestCase):
@@ -93,24 +113,6 @@ class LoadTemplateTestCase(unittest.TestCase):
         expected = '<p>{text}</p>'
         self.assert_template_loaded('components/component.html', expected)
 
-@target_function('load_data')
-class LoadDataTestCase(unittest.TestCase):
-    def test_load_data_from_file(self):
-        expected = [
-            {
-                "titulo": "Receita de miojo",
-                "detalhes": "Bata com um martelo antes de abrir o pacote. Misture o tempero, coloque em uma vasilha e aproveite seu snack :)"
-            },
-            {
-                "titulo": "Pão doce",
-                "detalhes": "Abra o pão e coloque o seu suco em pó favorito."
-            },
-        ]
-        m = mock_open(read_data=json.dumps(expected))
-        with patch('utils.open', m):
-            received = utils.load_data('postits.json')
-        self.assertEqual(expected, received)
-        self.assertEqual(Path(m.call_args[0][0]), Path('notes/postits.json'))
 
 @target_function('build_response')
 class BuildResponseTestCase(unittest.TestCase):

@@ -1,45 +1,33 @@
-from utils import load_data, load_template, build_response, add_note, remove_note, update_note
-from urllib.parse import unquote_plus
-from database import Database
+from utils import load_template
+import urllib
+from database import Database, Note
 
-def index(request: str, database: Database):
-    response = build_response()
+def index(request):
+    db = Database('banco_notas')
 
     if request.startswith('POST'):
-        response = build_response(code=303, reason='See Other', headers='Location: /')
         request = request.replace('\r', '') 
         partes = request.split('\n\n')
         corpo = partes[1]
+        if corpo.split("=")[0] == 'delete':
+            id_int = int(corpo.split("=")[1])
+            db.delete(id_int)
 
-        if "delete" in request:
-            note_id = int(corpo[7:])
-            remove_note(database, note_id)
-
-        elif "update" in request:
-            corpo_formatado = unquote_plus(corpo[7:])
-            params = {}
-
-            for chave_valor in corpo_formatado.split('&'):
-                chave = chave_valor.split('=')[0]
-                valor = chave_valor.split('=')[1]
-                params[chave] = valor
-            update_note(database, int(params["id"]), params["title"], params["content"])
-        
         else:
             params = {}
-
             for chave_valor in corpo.split('&'):
-                chave = unquote_plus(chave_valor.split('=')[0])
-                valor =  unquote_plus(chave_valor.split('=')[1])
-                params[chave] = valor
-            add_note(database, params["title"], params["content"])
-        
-    note_template = load_template('./note.html')
-    notes = [
-        note_template.format(title=dados.title, content=dados.content, id=dados.id)
-        for dados in load_data(database)
+                if chave_valor.startswith("titulo"):
+                    params["titulo"] = urllib.parse.unquote_plus(chave_valor[chave_valor.find("=")+1:], encoding="utf-8", errors="replace")
+                if chave_valor.startswith("detalhes"):
+                    params["detalhes"] = urllib.parse.unquote_plus(chave_valor[chave_valor.find("=")+1:], encoding="utf-8", errors="replace")
+
+            db.add(Note(title=params["titulo"], content=params["detalhes"]))
+            
+    note_template = load_template('components/note.html')
+    notes_li = [
+        note_template.format(title=dados.title, details=dados.content, id=dados.id)
+        for dados in db.get_all()
     ]
+    notes = '\n'.join(notes_li)
 
-    notes = '\n'.join(notes)
-
-    return response + load_template('./docs/index.html').format(notes=notes).encode()
+    return load_template('index.html').format(notes=notes).encode()
