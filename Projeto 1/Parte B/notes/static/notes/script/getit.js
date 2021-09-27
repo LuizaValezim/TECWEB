@@ -4,7 +4,6 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-
 document.addEventListener("DOMContentLoaded", function () {
   let textareas = document.getElementsByClassName("autoresize");
   for (let i = 0; i < textareas.length; i++) {
@@ -30,13 +29,11 @@ document.addEventListener("DOMContentLoaded", function () {
 var cardEditLs = document.querySelectorAll('.card-edit');
 var modalBg = document.querySelector('.model-bg');
 var modalClose = document.querySelector('.modal-close');
-
 var idNote = "";
 var titleModal = document.getElementById("titleModal");
 var detailsModal = document.getElementById("detailsModal");
 var updateButton = document.getElementById("update-button");
 var tagTitleModal = document.getElementById("tagtitle-modal");
-
 
 cardEditLs.forEach(el => el.addEventListener('click',function() {
   modalBg.classList.add('bg-active');

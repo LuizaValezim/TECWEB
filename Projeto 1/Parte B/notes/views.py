@@ -25,7 +25,7 @@ def add(request):
         note.save()
         return redirect('index')
     else:
-        if verifyExists(tagTitle): 
+        if verifyExists(tagTitle): #Verifica se tag já existe
             tag = Tag.objects.get(tagTitle=tagTitle)
 
         else:
@@ -39,6 +39,14 @@ def delete(request):
     idNote = request.POST.get('delete')
     note = Note.objects.get(id=int(idNote))
     note.delete()
+    tagid = note.tag
+    print(tagid)
+    if Note.objects.filter(tag=tagid).count() != 0:
+        pass
+    else:
+        tag = Tag.objects.get(tagTitle = note.tag)
+        tag.delete()
+    
     return redirect('index')
 
 def update(request):
@@ -47,21 +55,26 @@ def update(request):
     content = request.POST.get('detalhes')
     tagTitle = request.POST.get('tagtitle')
     note = Note.objects.get(id=int(idNote))
+    originalTag = note.tag
     if tagTitle == "":
         note.tag.tagTitle = ""
     else:
-        if verifyExists(tagTitle): 
+        if verifyExists(tagTitle): #Verifica se tag já existe
             tag = Tag.objects.get(tagTitle=tagTitle)
-
         else:
             tag = createTag(tagTitle)
-    
     note.tag = tag
     note.title = title
     note.content = content
     note.save()
+    if Note.objects.filter(tag=originalTag).count() == 0:
+        tag = Tag.objects.get(tagTitle = originalTag)
+        tag.delete()
+    else:
+        pass
     return redirect('index')
 
+#Tags
 def tagTypes(request):
     all_tags = Tag.objects.all()
     return render(request, '../templates/notes/tagTypes.html', {'tags': all_tags})
