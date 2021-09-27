@@ -6,6 +6,6 @@ urlpatterns = [
     path('add', views.add, name="add"), 
     path('delete', views.delete, name='delete'),
     path('update', views.update, name='update'),
-    path('listtags', views.listTags, name="listtags"),
-    path('notesoftag', views.notesOfTag, name="notesoftag")
+    path('tagtypes', views.tagTypes, name="tagtypes"),
+    path('tagcontent', views.tagContent, name="tagcontent")
 ]   

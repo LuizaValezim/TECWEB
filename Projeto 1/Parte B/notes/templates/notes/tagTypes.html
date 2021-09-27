@@ -9,7 +9,7 @@
     <div class="card-container">
         {% for tag in tags %}
         <div class="tag">
-            <form method="GET" action="/notesoftag">
+            <form method="GET" action="/tagcontent">
                 <button name="tag" type="submit" class="card" value={{tag.tagTitle}}>{{tag.tagTitle}}</button>
             </form>
         </div>

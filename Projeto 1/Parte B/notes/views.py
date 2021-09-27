@@ -62,11 +62,11 @@ def update(request):
     note.save()
     return redirect('index')
 
-def listTags(request):
+def tagTypes(request):
     all_tags = Tag.objects.all()
     return render(request, '../templates/notes/tagTypes.html', {'tags': all_tags})
 
-def notesOfTag(request):
+def tagContent(request):
     tagTitle = request.GET.get('tag')
     tag = Tag.objects.get(tagTitle = tagTitle)
     notes = Note.objects.filter(tag=tag.id)
