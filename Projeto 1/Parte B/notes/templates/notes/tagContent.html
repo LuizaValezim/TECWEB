@@ -2,12 +2,10 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{% static ./../../../static/notes/css/getit.css"/>
+<link rel="stylesheet" type="text/css" href="../../static/notes/css/getit.css"/>
 
+<h1 class="tag-header">As notas classificadas como: {{tag_title}}</h1>
 <main class="container">
-  
-  <h1 class="tag-header">As notas classificadas como: {{tag_title}}</h1>
-  <main class="container">
     <div class="card-container">
         {% for note in notes %}
           <div class="card" id="{{note.id}}">
@@ -27,5 +25,5 @@
       </div>
 </main>
 
-<script type="text/javascript" src="{% static ./../../../static/notes/script/getit.js"></script>
+<script type="text/javascript" src="../../static/notes/script/getit.js"></script>
 {% endblock %}

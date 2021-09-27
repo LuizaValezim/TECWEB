@@ -20,35 +20,34 @@
     {% load static %}
     <div class="appbar">
       <div class="appbar-logo">
-        <img src="{% static ./../../../static/notes/img/logo-getit.png" class="logo"/>
+        <img src="./../../../static/notes/img/logo-getit.png" class="logo"/>
         <span class="subtitle">Como o Post-it, mas com outro verbo</span>
       </div>
 
       <div class="appbar-buttons">
-        <a href="../notes/index.html">Notas</a>
-        <a href="../notes/tagTypes.html">Tags</a>
+        <a href="/">Notas</a>
+        <a href="./tagtypes">Tags</a>
       </div>
 
     </div>
-
     {% block content %} {% endblock %}
 
     <div class="model-bg">
-    <div class="modal">
-      <h1>Editar Nota</h1>
-      <form method="POST" action="/update" class="form-edit">
-        {% csrf_token %}
-        <label for="titulo">Título</label>
-        <input id="titleModal" name="titulo" class="form-card-title"/></input>
-        <label for="detalhes">Detalhes</label>
-        <textarea id="detailsModal" name="detalhes" class="autoresize"></textarea>
-        <label for="tagtitle">Tag</label>
-        <input id="tagtitle-modal" type="text" name="tagtitle" class="form-card-title"/>
-        <button id="update-button" name="update" type="submit" class="btn">Atualizar</button>
-      </form>
-      <span class="modal-close">X</span>
-    </div>
+      <div class="modal">
+        <h1>Editar Nota</h1>
+        <form method="POST" action="/update" class="form-edit">
+          {% csrf_token %}
+          <label for="titulo">Título</label>
+          <input id="titleModal" name="titulo" class="form-card-title"/></input>
+          <label for="detalhes">Detalhes</label>
+          <textarea id="detailsModal" name="detalhes" class="autoresize"></textarea>
+          <label for="tagtitle">Tag</label>
+          <input id="tagtitle-modal" type="text" name="tagtitle" class="autoresize"/>
+          <button id="update-button" name="update" type="submit" class="btn">Atualizar</button>
+        </form>
+        <span class="modal-close">X</span>
+      </div>
   </div>
   </body>
-  <script type="text/javascript" src="{% static ./../../../static/notes/script/getit.js"></script>
+  <script type="text/javascript" src="../../static/notes/script/getit.js"></script>
 </html>

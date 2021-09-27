@@ -2,15 +2,15 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{% static ./../../../static/notes/css/getit.css"/>
+<link rel="stylesheet" type="text/css" href="../../static/notes/css/getit.css"/>
+<h1 class="tag-header">Tags:</h1>
 
 <main class="container">
-    <h1 class="tag-header">Lista de Tags</h1>
     <div class="card-container">
         {% for tag in tags %}
-        <div class="tag">
+        <div class="card">
             <form method="GET" action="/tagcontent">
-                <button name="tag" type="submit" class="card" value={{tag.tagTitle}}>{{tag.tagTitle}}</button>
+                <button name="tag" type="submit" class="card-tag" value={{tag.tagTitle}}>{{tag.tagTitle}}</button>
             </form>
         </div>
         {% endfor %}

@@ -2,8 +2,7 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{% static './../../static/notes/css/getit.css"/>
-
+<link rel="stylesheet" type="text/css" href="../../static/notes/css/getit.css"/>
 
 <main class="container">
   <form method="post" class="form-card" action="/add">
@@ -20,24 +19,25 @@
   <div class="card-container">
     {% for note in notes %}
       <div class="card" id="{{note.id}}">
-      <h3 class="card-title">{{note.title}}</h3>
-      <h2 class="card-tag">Tag: {{note.tag}}</h2>
-      <div class="card-content">
-        <p>{{note.content}}</p> 
+        <h3 class="card-title">{{note.title}}</h3>
+        <h2 class="card-tag">Tag: {{note.tag}}</h2>
+        <div class="card-content">
+          <p>{{note.content}}</p> 
+        </div>
+
+        <div class="notebtn">
+          <form method="POST" action="/delete">
+            {% csrf_token %}
+            <button name="delete" type="submit" class="card-action" value="{{note.id}}"> delete </button>
+          </form>
+          <button name="edit" class="card-action" value="{{note.title}}&{{note.content}}&{{note.id}}&{{note.tag}}"> edit </button>
+        </div>
+
     </div>
-    <div class="notebtn">
-      <form method="POST" action="/delete">
-        {% csrf_token %}
-        <button name="delete" type="submit" class="card-action" value="{{note.id}}"> delete </button>
-      </form>
-      <button name="edit" class="card-action" value="{{note.title}}&{{note.content}}&{{note.id}}&{{note.tag}}"> edit </button>
-      
-  </div>
-  </div>
     {% endfor %}
   </div>
 
 </main>
 
-<script type="text/javascript" src="{% static './../../../static/notes/script/getit.js"></script>
+<script type="text/javascript" src="../../static/notes/script/getit.js"></script>
 {% endblock %}
