@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Get-it</title>
+    <title>Get-it, right?</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
@@ -19,8 +19,10 @@
   <body>
     {% load static %}
     <div class="appbar">
-      <img src="{% static ./../../../static/notes/img/logo-getit.png" class="logo"/>
-      <span class="subtitle">Como o Post-it, mas com outro verbo</span>
+      <div class="appbar-logo">
+        <img src="{% static ./../../../static/notes/img/logo-getit.png" class="logo"/>
+        <span class="subtitle">Como o Post-it, mas com outro verbo</span>
+      </div>
 
       <div class="appbar-buttons">
         <a href="../notes/index.html">Notas</a>

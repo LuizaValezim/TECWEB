@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{% static ./../../../static/notes/css/getit.css"/>
+<link rel="stylesheet" type="text/css" href="{% static ./../../static/notes/css/getit.css"/>
 
 
 <main class="container">
@@ -28,9 +28,9 @@
   <div class="notebtn">
     <form method="POST" action="/delete">
       {% csrf_token %}
-      <button name="delete" type="submit" class="card-delete" value="{{note.id}}">&#128465;</button>
+      <button name="delete" type="submit" class="card-delete" value="{{note.id}}"> delete </button>
     </form>
-    <button name="edit" class="card-edit" value="{{note.title}}&{{note.content}}&{{note.id}}">&#9998;</button>
+    <button name="edit" class="card-edit" value="{{note.title}}&{{note.content}}&{{note.id}}"> edit </button>
       
   </div>
   
