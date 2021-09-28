@@ -1,18 +1,18 @@
 {% extends "notes/base.html" %}
 {% load static %}
-
 {% block content %}
+
 <link rel="stylesheet" type="text/css" href="../../static/notes/css/getit.css"/>
 
 <main class="container">
   <form method="post" class="form-card" action="/add">
     {% csrf_token %}
     <label for="titulo">Título</label>
-    <input id="titulo" type="text" name="titulo" class="form-card-title"/>
+    <input id="titulo" placeholder="Digite o título..." type="text" name="titulo" class="form-card-title"/>
     <label for="detalhes">Detalhes</label>
-    <textarea id="detalhes" name="detalhes" class="autoresize"></textarea>
-    <label for="tagtitle">Tag</label>
-    <input id="tagtitle" type="text" name="tagtitle" class="autoresize"></input>
+    <textarea id="detalhes" placeholder="Digite os detalhes..." name="detalhes" class="autoresize"></textarea>
+    <label for="tagtitle" >Tag</label>
+    <input id="tagtitle" placeholder="Qual a tag?" type="text" name="tagtitle" class="autoresize"></input>
     <input type="submit" class="btn"/>
   </form>
 
@@ -28,7 +28,7 @@
         <div class="notebtn">
           <form method="POST" action="/delete">
             {% csrf_token %}
-            <button name="delete" type="submit" class="card-action" value="{{note.id}}"> delete </button>
+          <button name="delete" type="submit" class="card-action" value="{{note.id}}"> delete </button>
           </form>
           <button name="edit" class="card-action" value="{{note.title}}&{{note.content}}&{{note.id}}&{{note.tag}}"> edit </button>
         </div>

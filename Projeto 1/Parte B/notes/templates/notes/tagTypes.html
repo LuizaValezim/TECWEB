@@ -1,7 +1,7 @@
 {% extends "notes/base.html" %}
 {% load static %}
-
 {% block content %}
+
 <link rel="stylesheet" type="text/css" href="../../static/notes/css/getit.css"/>
 <h1 class="tag-header">Tags:</h1>
 
@@ -10,7 +10,7 @@
         {% for tag in tags %}
         <div class="card">
             <form method="GET" action="/tagcontent">
-                <button name="tag" type="submit" class="card-tag" value={{tag.tagTitle}}>{{tag.tagTitle}}</button>
+                <button name="tag" type="submit" class="card-action2" value={{tag.tagTitle}}>{{tag.tagTitle}}</button>
             </form>
         </div>
         {% endfor %}

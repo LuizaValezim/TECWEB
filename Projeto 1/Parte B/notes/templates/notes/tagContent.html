@@ -1,28 +1,28 @@
 {% extends "notes/base.html" %}
 {% load static %}
-
 {% block content %}
+
 <link rel="stylesheet" type="text/css" href="../../static/notes/css/getit.css"/>
 
 <h1 class="tag-header">As notas classificadas como: {{tag_title}}</h1>
 <main class="container">
     <div class="card-container">
         {% for note in notes %}
-          <div class="card" id="{{note.id}}">
-          <h3 class="card-title">{{note.title}}</h3>
-          <div class="card-content">
+      <div class="card" id="{{note.id}}">
+        <h3 class="card-title">{{note.title}}</h3>
+        <div class="card-content">
             <p>{{note.content}}</p> 
         </div>
         <div class="notebtn">
           <form method="POST" action="/delete">
             {% csrf_token %}
-            <button name="delete" type="submit" class="card-delete" value="{{note.id}}">&#128465;</button>
+            <button name="delete" type="submit" class="card-action" value="{{note.id}}"> delete </button>
           </form>
-          <button name="edit" class="card-edit" value="{{note.title}}&{{note.content}}&{{note.id}}&{{note.tag}}">&#9998;</button>
-      </div>
+          <button name="edit" class="card-action" value="{{note.title}}&{{note.content}}&{{note.id}}&{{note.tag}}"> edit </button>
+        </div>
       </div>
         {% endfor %}
-      </div>
+    </div>
 </main>
 
 <script type="text/javascript" src="../../static/notes/script/getit.js"></script>
