@@ -1,0 +1,20 @@
+{% load static %}
+{% block content %}
+
+<main class="main">
+    <div> 
+        <h3> Memória </h3>
+        <input type="text">
+        <button name="submit" type="submit" value={{note.content}}> submit </button>
+
+        <div class="card-container">
+            <!-- {% for note in notes %} -->
+            <div class="card-content">
+                <p>{{note.content}}</p> 
+            </div>    
+            <!-- {% endfor %} -->
+    </div>
+
+</main>
+
+{% endblock %}
