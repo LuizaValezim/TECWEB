@@ -32,5 +32,5 @@ def index(request):
 
     return load_template('index.html').format(notes=notes).encode()
 
-def error404():
-    return load_template('404.html').format().encode()
+def error():
+    return load_template('error404.html').format().encode()

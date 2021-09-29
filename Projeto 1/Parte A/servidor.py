@@ -1,7 +1,7 @@
 import socket
 from pathlib import Path
 from utils import extract_route, read_file
-from views import index, error404
+from views import index, error
 
 CUR_DIR = Path(__file__).parent
 SERVER_HOST = 'localhost'
@@ -28,7 +28,7 @@ while True:
     elif route == '':
         response = index(request)
     else:
-        response = error404(request)
+        response = error(request)
 
     client_connection.sendall('HTTP/1.1 200 OK\n\n'.encode() + response)
 
