@@ -28,7 +28,7 @@ while True:
     elif route == '':
         response = index(request)
     else:
-        response = error(request)
+        response = error()
 
     client_connection.sendall('HTTP/1.1 200 OK\n\n'.encode() + response)
 
