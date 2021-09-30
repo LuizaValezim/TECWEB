@@ -1,0 +1,22 @@
+{% extends "notes/base.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="../../static/notes/css/getit.css"/>
+
+<h1 class="tag-header">As notas classificadas como: {{tag_title}}</h1>
+<main class="container">
+    <div class="card-container">
+        {% for pessoa in allPessoas %}
+      <div class="card" id="{{note.id}}">
+        <h3 class="card-title">{{pessoa.nome}}</h3>
+        <div class="card-content">
+            <p>{{pessoa.sobrenome}}</p> 
+        </div>
+      </div>
+        {% endfor %}
+    </div>
+</main>
+
+<script type="text/javascript" src="../../static/notes/script/getit.js"></script>
+{% endblock %}

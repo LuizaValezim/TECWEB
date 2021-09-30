@@ -1,0 +1,19 @@
+{% extends "notes/base.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="../../static/notes/css/getit.css"/>
+<h1 class="tag-header">Sobrenomes:</h1>
+
+<main class="container">
+    <div class="card-container">
+        {% for pessoa in allPessoas %}
+        <div class="card">
+            <form method="GET" action="/tagcontent">
+                <button name="tag" type="submit" class="card-action2" value={{pessoa.sobreome}}>{{pessoa.sobrenome}}</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}
