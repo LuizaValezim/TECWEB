@@ -2,7 +2,10 @@ from pathlib import Path
 import json
 
 def extract_route(request):
-    return request.split()[1][1:]
+    try:
+        return request.split()[1][1:]
+    except:
+        return request
 
 request_test = ""\
 "GET /img/logo-getit.png HTTP/1.1 \n"\

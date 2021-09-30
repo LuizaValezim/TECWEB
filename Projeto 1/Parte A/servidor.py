@@ -1,7 +1,7 @@
 import socket
 from pathlib import Path
 from utils import extract_route, read_file
-from views import index, error
+from views import index, error, tecweb
 
 CUR_DIR = Path(__file__).parent
 SERVER_HOST = 'localhost'
@@ -25,6 +25,8 @@ while True:
     filepath = CUR_DIR / route
     if filepath.is_file():
         response = read_file(filepath)
+    elif route == 'tecweb' or route == request:
+        response = tecweb()
     elif route == '':
         response = index(request)
     else:

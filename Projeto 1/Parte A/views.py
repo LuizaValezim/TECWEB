@@ -34,3 +34,6 @@ def index(request):
 
 def error():
     return load_template('error404.html').format().encode()
+
+def tecweb():
+    return load_template('tecweb.html').format().encode()
