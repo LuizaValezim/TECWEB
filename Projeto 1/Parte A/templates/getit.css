@@ -3,6 +3,19 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+.tecweb{
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.tecweb-btn{
+  font-size: 1.1rem;
+  background-color: #f7d736
+}
+
 .appbar {
   display: flex;
   flex-direction: row;
