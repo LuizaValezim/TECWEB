@@ -19,13 +19,32 @@ body {
 .appbar {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  align-content: space-between;
+  /* justify-content: space-between; */
+  align-content: center;
   align-items: center;
   font-family: "Roboto", sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   background-color: #f7d736;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.2), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.appbar-buttons{
+  margin: 0 1rem;
+}
+
+a:link, a:visited {
+  background-color: #fff2b1;
+  color: black;
+  padding: 1rem 1.5rem;
+  margin: 0 0.3rem 0 0;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  color: white;
+  background-color: #fae890;
 }
 
 .logo{
