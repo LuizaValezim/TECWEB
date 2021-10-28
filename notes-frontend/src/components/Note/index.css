@@ -1,0 +1,36 @@
+.title {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    min-height: 50rem;
+    padding: 0.1rem;
+    justify-content: center;
+    box-shadow: 0 1rem 10rem rgb(242 65 80 / 20%), 0rem 1rem 3rem rgb(242 65 80 / 70%);
+    /* border-radius: 5px; */
+    background-color: #F24150;
+    font-family: 'Rubik', sans-serif;
+    /* font-family: 'Work Sans', sans-serif; */
+    color: white;
+    font-size: 3.5rem;
+  }
+
+h1 {
+    margin: 0.02rem;
+    height: 6rem;
+}
+  
+  .card-title {
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    color: #4c4c4c;
+  }
