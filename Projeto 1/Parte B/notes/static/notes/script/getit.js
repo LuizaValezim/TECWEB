@@ -33,16 +33,16 @@ var idNote = "";
 var titleModal = document.getElementById("titleModal");
 var detailsModal = document.getElementById("detailsModal");
 var updateButton = document.getElementById("update-button");
-var tagTitleModal = document.getElementById("tagtitle-modal");
+// var tagTitleModal = document.getElementById("tagtitle-modal");
 
 cardEditLs.forEach(el => el.addEventListener('click',function() {
   modalBg.classList.add('bg-active');
-  let [title, content, id, tag] = el.value.split("&");
+  let [title, content, id] = el.value.split("&");
   console.log(title);
     titleModal.value = title;
     detailsModal.innerHTML = content;
     updateButton.value = id;
-    tagTitleModal.value = tag
+    // tagTitleModal.value = tag
   
 }));
 

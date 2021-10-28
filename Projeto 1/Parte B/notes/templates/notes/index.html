@@ -11,8 +11,8 @@
     <input id="titulo" placeholder="Digite o título..." type="text" name="titulo" class="form-card-title"/>
     <label for="detalhes">Detalhes</label>
     <textarea id="detalhes" placeholder="Digite os detalhes..." name="detalhes" class="autoresize"></textarea>
-    <label for="tagtitle" >Tag</label>
-    <input id="tagtitle" placeholder="Qual a tag?" type="text" name="tagtitle" class="autoresize"></input>
+    <!-- <label for="tagtitle" >Tag</label>
+    <input id="tagtitle" placeholder="Qual a tag?" type="text" name="tagtitle" class="autoresize"></input> -->
     <input type="submit" class="btn"/>
   </form>
 
@@ -20,7 +20,7 @@
     {% for note in notes %}
       <div class="card" id="{{note.id}}">
         <h3 class="card-title">{{note.title}}</h3>
-        <h2 class="card-tag">Tag: {{note.tag}}</h2>
+        <!-- <h2 class="card-tag">Tag: {{note.tag}}</h2> -->
         <div class="card-content">
           <p>{{note.content}}</p> 
         </div>

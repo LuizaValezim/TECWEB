@@ -12,33 +12,31 @@ def index(request):
 def add(request):
     title = request.POST.get('titulo')
     content = request.POST.get('detalhes')
-    tagTitle = request.POST.get('tagtitle').lower()
-    if tagTitle == "":
-        note = Note(title=title, content=content)
-        note.save()
-        return redirect('index')
-    else:
-        if verifyExists(tagTitle): 
-            tag = Tag.objects.get(tagTitle=tagTitle)
+    # tagTitle = request.POST.get('tagtitle').lower()
+    # if tagTitle == "":
+    note = Note(title=title, content=content)
+    note.save()
+    # else:
+        # if verifyExists(tagTitle): 
+        #     tag = Tag.objects.get(tagTitle=tagTitle)
 
-        else:
-            tag = createTag(tagTitle)
+        # else:
+        # tag = createTag(tagTitle)
             
-        note = Note(title=title, content=content, tag=tag)
-        note.save()
-        return redirect('index')
+        # note = Note(title=title, content=content, tag=tag)
+    return redirect('index')
 
 def delete(request):
     idNote = request.POST.get('delete')
     note = Note.objects.get(id=int(idNote))
     note.delete()
-    tagid = note.tag
-    print(tagid)
-    if Note.objects.filter(tag=tagid).count() != 0:
-        pass
-    else:
-        tag = Tag.objects.get(tagTitle = tagid)
-        tag.delete()
+    # tagid = note.tag
+    # print(tagid)
+    # if Note.objects.filter(tag=tagid).count() != 0:
+    #     pass
+    # else:
+        # tag = Tag.objects.get(tagTitle = tagid)
+        # tag.delete()
     
     return redirect('index')
 
@@ -46,50 +44,50 @@ def update(request):
     idNote = request.POST.get('update')
     title = request.POST.get('titulo')
     content = request.POST.get('detalhes')
-    tagTitle = request.POST.get('tagtitle').lower()
+    # tagTitle = request.POST.get('tagtitle').lower()
     note = Note.objects.get(id=int(idNote))
-    originalTag = note.tag
+    # originalTag = note.tag
 
-    if tagTitle == "":
-        note.tag.tagTitle = ""
-    else:
-        if verifyExists(tagTitle):
-            tag = Tag.objects.get(tagTitle=tagTitle)
-        else:
-            tag = createTag(tagTitle)
+    # if tagTitle == "":
+    #     note.tag.tagTitle = ""
+    # else:
+    #     if verifyExists(tagTitle):
+    #         tag = Tag.objects.get(tagTitle=tagTitle)
+    #     else:
+    # tag = createTag(tagTitle)
 
-    note.tag = tag
+    # note.tag = tag
     note.title = title
     note.content = content
     note.save()
     
-    if Note.objects.filter(tag=originalTag).count() == 0:
-        tag = Tag.objects.get(tagTitle = originalTag)
-        tag.delete()
-    else:
-        pass
+    # if Note.objects.filter(tag=originalTag).count() == 0:
+    #     tag = Tag.objects.get(tagTitle = originalTag)
+    #     tag.delete()
+    # else:
+    #     pass
     return redirect('index')
 
-def tagTypes(request):
-    all_tags = Tag.objects.all()
-    return render(request, '../templates/notes/tagTypes.html', {'tags': all_tags})
+# def tagTypes(request):
+#     all_tags = Tag.objects.all()
+#     return render(request, '../templates/notes/tagTypes.html', {'tags': all_tags})
 
-def tagContent(request):
-    tagTitle = request.GET.get('tag')
-    tag = Tag.objects.get(tagTitle = tagTitle)
-    notes = Note.objects.filter(tag=tag.id)
-    return render(request, '../templates/notes/tagContent.html', {'notes': notes, 'tag_title': tagTitle})
+# def tagContent(request):
+#     tagTitle = request.GET.get('tag')
+#     tag = Tag.objects.get(tagTitle = tagTitle)
+#     notes = Note.objects.filter(tag=tag.id)
+    # return render(request, '../templates/notes/tagContent.html', {'notes': notes, 'tag_title': tagTitle})
 
-def createTag(tagTitle):
-    tag = Tag(tagTitle = tagTitle.lower())
-    tag.save()
-    return tag
+# def createTag(tagTitle):
+#     tag = Tag(tagTitle = tagTitle.lower())
+#     tag.save()
+#     return tag
 
-def verifyExists(tagTitle):
-    if Tag.objects.filter(tagTitle = tagTitle.lower()).exists():
-        return True
-    else: 
-        return False
+# def verifyExists(tagTitle):
+#     if Tag.objects.filter(tagTitle = tagTitle.lower()).exists():
+#         return True
+#     else: 
+#         return False
     
 @api_view(['GET', 'POST'])
 def api_note(request, note_id):
